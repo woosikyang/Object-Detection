@@ -21,6 +21,10 @@ distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#0082c8', '#f58231', '#911e
 label_color_map = {k: distinct_colors[i] for i, k in enumerate(label_map.keys())}
 
 
+def collate_fn(batch):
+    return tuple(zip(*batch))
+
+
 def parse_annotation(annotation_path):
     tree = ET.parse(annotation_path)
     root = tree.getroot()

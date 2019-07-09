@@ -4,7 +4,7 @@ import json
 import os
 from PIL import Image
 from utils import transform
-
+import numpy as np
 
 class PascalVOCDataset(Dataset):
     """
