@@ -17,6 +17,7 @@ from torchvision.models.detection.rpn import AnchorGenerator
 import utils
 from engine import train_one_epoch, evaluate
 
+import transforms as T
 
 class PennFudanDataset(object):
     def __init__(self, root, transforms):
@@ -156,6 +157,7 @@ def main():
 
     # our dataset has two classes only - background and person
     num_classes = 2
+    hidden_layer = 256
     # use our dataset and defined transformations
     dataset = PennFudanDataset('PennFudanPed', get_transform(train=True))
     dataset_test = PennFudanDataset('PennFudanPed', get_transform(train=False))
@@ -175,7 +177,7 @@ def main():
         collate_fn=utils.collate_fn)
 
     # get the model using our helper function
-    model = get_model_instance_segmentation(num_classes)
+    model = get_model_instance_segmentation(num_classes, hidden_layer)
 
     # move model to the right device
     model.to(device)
